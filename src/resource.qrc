@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="Back">
+    <file>Recursos/[2K]Chip04/Chip04_col.jpg</file>
+    <file>Recursos/[2K]Tiles72/Tiles72_rgh.jpg</file>
+    <file>Recursos/[2K]Tiles72/Tiles72_col.jpg</file>
+    <file>Recursos/[2K]Planks21/Planks21_col.jpg</file>
+  </qresource>
+  <qresource prefix="BotonesCentrales">
+    <file>Recursos/Menos.png</file>
+    <file>Recursos/Candado.png</file>
+    <file>Recursos/Mas.png</file>
+  </qresource>
+</RCC>
