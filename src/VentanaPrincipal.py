@@ -31,6 +31,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.listaMarca.listarObjetos()
         self.listaProductos = ListaObjetos(tabla="productos")
         self.listaProductos.listarObjetos()
+        self.listaBusqueda =[]
         self.botenesDescripcion = []
         #region Menubar
         self.BarraMenu.triggered[QAction].connect(self.eventoBarraMenu)
@@ -88,8 +89,8 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.cargarDatosTablaProductos()
 
     def eventoBusqueda(self,r):
-        tmp = self.listaProductos.busqueda(r)
-        self.cargarDatosTablaProductos(lista=tmp)
+        self.listaBusqueda = self.listaProductos.busqueda(r)
+        self.cargarDatosTablaProductos(lista=self.listaBusqueda)
 
 
     def cargarDatosTablaProductos(self, lista = ""):
@@ -140,13 +141,18 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
     def check_clicked(self):
 #        print("{}%".format(self.sender().objectName()))
-        for i in self.botenesDescripcion:
-            if i[0].objectName() == self.sender().objectName():
-                self.vOP = VentanaOpcionesProductos()
-                self.vOP.darValores(self.listaProductos.lista[i[1]])
-                self.vOP.show()
-          #      print(self.listaProductos.lista[i[1]])
-
+        if self.txtBusquedaProductos.text() == "":
+            for i in self.botenesDescripcion:
+                if i[0].objectName() == self.sender().objectName():
+                    self.vOP = VentanaOpcionesProductos()
+                    self.vOP.darValores(self.listaProductos.lista[i[1]])
+                    self.vOP.show()
+        else:
+            for i in self.botenesDescripcion:
+                if i[0].objectName() == self.sender().objectName():
+                    self.vOP = VentanaOpcionesProductos()
+                    self.vOP.darValores(self.listaBusqueda[i[1]])
+                    self.vOP.show()
 
 
 
