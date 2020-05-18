@@ -23,7 +23,7 @@ from Herramientas.Conector import ConexionBd
 from PyQt5.QtWidgets import QPushButton
 from VentanaLogin import VentanaLogin
 from VentanaProveedor import VentanaAgregarProveedor
-
+from VentanaAgregarEmpleado import VentanaAgregarEmpleado
 from Herramientas.ListaObjeto import ListaObjetos
 
 
@@ -120,6 +120,9 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.vProveedor = VentanaAgregarProveedor()
             self.vProveedor.senal.connect(self.eventoActualizar)
             self.vProveedor.show()
+        elif res == "actionEmpleado":
+            self.vEmpleado = VentanaAgregarEmpleado()
+            self.vEmpleado.show()
 
         elif res == "actionAcerca_de":
             self.d = VentanaAcercaDe()

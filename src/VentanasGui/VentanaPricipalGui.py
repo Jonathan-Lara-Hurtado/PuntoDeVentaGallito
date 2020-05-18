@@ -191,6 +191,8 @@ class Ui_VentanaPricipal(object):
         self.actionCategoriasalta.setObjectName("actionCategoriasalta")
         self.actionProveedor = QtWidgets.QAction(VentanaPricipal)
         self.actionProveedor.setObjectName("actionProveedor")
+        self.actionEmpleado = QtWidgets.QAction(VentanaPricipal)
+        self.actionEmpleado.setObjectName("actionEmpleado")
         self.menuAyuda.addAction(self.actionAcerca_de)
         self.menuAyuda.addSeparator()
         self.menuAyuda.addAction(self.actionDocumentacion)
@@ -198,6 +200,7 @@ class Ui_VentanaPricipal(object):
         self.menualta.addAction(self.actionproductoalta)
         self.menualta.addAction(self.actionMarcaalta)
         self.menualta.addAction(self.actionProveedor)
+        self.menualta.addAction(self.actionEmpleado)
         self.menuAlta.addAction(self.menualta.menuAction())
         self.menuHerramientas.addAction(self.actionEscanerApp)
         self.menuHerramientas.addSeparator()
@@ -252,6 +255,7 @@ class Ui_VentanaPricipal(object):
         self.actionUsuarios.setText(_translate("VentanaPricipal", "Usuarios"))
         self.actionCategoriasalta.setText(_translate("VentanaPricipal", "Categorias"))
         self.actionProveedor.setText(_translate("VentanaPricipal", "Proveedor"))
+        self.actionEmpleado.setText(_translate("VentanaPricipal", "Empleado"))
 
 import resource_rc
 
