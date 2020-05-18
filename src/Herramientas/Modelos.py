@@ -237,3 +237,59 @@ class Proveedor:
                 self.region,self.codigopostal,
                 self.pais,self.telefono,
                 self.fax]
+
+
+class DetalleCompra:
+    def __init__(self,idventa,idproducto,precio,cantidad):
+        self.__idventa = idventa
+        self.__idproducto = idproducto
+        self.__precio = precio
+        self.__cantidad = cantidad
+        self.__subtotal = self.__precio * self.__cantidad
+    
+    @property
+    def subtotal(self):
+        return self.__subtotal 
+    
+    @subtotal.setter
+    def subtotal(self, value):
+        self.__subtotal = value
+    
+    @property
+    def idventa(self):
+        return self.__idventa 
+    
+    @idventa.setter
+    def idventa(self, value):
+        self.__idventa = value
+        
+    @property
+    def idproducto(self):
+        return self.__idproducto 
+    
+    @idproducto.setter
+    def idproducto(self, value):
+        self.__idproducto = value
+    
+    @property
+    def precio(self):
+        return self.__precio 
+    
+    @precio.setter
+    def precio(self, value):
+        self.__precio = value
+    
+    @property
+    def cantidad(self):
+        return self.__cantidad 
+    
+    @cantidad.setter
+    def cantidad(self, value):
+        self.__cantidad = value
+
+    def __str__(self):
+        return str(self.idproducto)
+
+    def listarAtributos(self):
+        return [self.idventa,self.idproducto,
+                self.precio,self.cantidad]

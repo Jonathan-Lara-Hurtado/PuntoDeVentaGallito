@@ -11,23 +11,30 @@ class VentanaOpcionesProductos(QMainWindow,Ui_VentanaOpcionesProductosGui):
         QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
         self.iniciar()
-        self.lista = []
+        self.categoria= {}
+        self.btnACancelar.clicked.connect(self.eventoCancelar)
 
     def iniciar(self):
         self.centrarPantalla()
 
     def darValores(self,valor):
         self.txtACodigoBarra.setText(valor.codigoBarra)
-        self.txtANombre.setText(str(valor))
+        self.txtANombre.setText(str(valor.nombreproducto))
         self.textEditADescripcion.setText(str(valor.descripcion))
-        self.stockspink.setValue(valor.stock)
-        self.preciospin.setValue(valor.precio)
+        self.stockspink.setValue(valor.existencia)
+        self.preciospin.setValue(valor.precioventa)
 #        self.txtACodigoBarra.setText()
 
 
-    def darCategoria(self,valor):
+    def darMarca(self,valor):
+        self.categoria = valor
         for i in self.categoria:
             self.comboMarca.addItem(self.tr(i.marca))
+
+    def darProvedor(self, valor):
+        self.proveedor = valor
+        for i in self.proveedor:
+            self.comboProveedor.addItem(self.tr(i.nombreCompany))
 
     def centrarPantalla(self):
         """

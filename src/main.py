@@ -39,7 +39,7 @@ class VentanaSplash(QMainWindow , Ui_SplashScreen):
         else:
             self.hide()
             self.principal = VentanaPrincipal()
-            self.principal.showFullScreen()
+            #self.principal.showFullScreen()
             self.principal.show()
 
     def centrarPantalla(self):

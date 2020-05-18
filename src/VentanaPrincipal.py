@@ -27,6 +27,7 @@ from VentanaAgregarEmpleado import VentanaAgregarEmpleado
 from Herramientas.ListaObjeto import ListaObjetos
 
 
+
 class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
     def __init__(self, *args, **kwargs):
@@ -41,21 +42,38 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.listaProductos.listarObjetos()
         self.listaProveedor = ListaObjetos(tabla="proveedor")
         self.listaProveedor.listarObjetos()
+        self.listaCarrito = ListaObjetos(tabla="addDetalleCompar")
+        self.listaCarrito.listarObjetos()
+        self.listaTmp = []
+        
+
 
         self.listaBusqueda =[]
         self.botenesDescripcion = []
         self.btnBloquear.clicked.connect(self.bloquearTerminal)
+        self.btnAddProducto.clicked.connect(self.eventoAgregarCarrito)
+        self.btnQuitarProducto.clicked.connect(self.eventoQuitarCarrito)
         #region Menubar
         self.BarraMenu.triggered[QAction].connect(self.eventoBarraMenu)
         #endregion
+        # region EventoClickTablaProductos
         self.tablaProductos.cellClicked.connect(self.clickTablaProductos)
-        self.tablaProductos.clicked.connect(self.senaltabla)
+        self.tablaProductosFila = -1
+        #self.tablaProductos.clicked.connect(self.senaltabla)
+
+        # endregion
         self.txtBusquedaProductos.textChanged.connect(self.eventoBusqueda)
         self.vl = VentanaLogin()
         self.vl.setWindowFlag(Qt.WindowCloseButtonHint, True)
         self.vl.btnAceptar.clicked.connect(self.eventoLogin)
         self.inicio()
 
+    def eventoAgregarCarrito(self):
+        print(self.tablaProductosFila)
+
+
+    def eventoQuitarCarrito(self):
+        print("quito")
 
     def bloquearTerminal(self,t):
         self.sesiones()
@@ -95,7 +113,9 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.vl.mensajeError.setText("Error de autentificacion")
 
     def clickTablaProductos(self,t,r):
-        print(t,r)
+
+        #print(self.tablaProductos.item(t,0).text())
+        #self.tablaProductosFila = t
 
     def senaltabla(self,s):
         print(s)
@@ -209,12 +229,16 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
                 if i[0].objectName() == self.sender().objectName():
                     self.vOP = VentanaOpcionesProductos()
                     self.vOP.darValores(self.listaProductos.lista[i[1]])
+                    self.vOP.darMarca(self.listaMarca.lista)
+                    self.vOP.darProvedor(self.listaProveedor.lista)
                     self.vOP.show()
         else:
             for i in self.botenesDescripcion:
                 if i[0].objectName() == self.sender().objectName():
                     self.vOP = VentanaOpcionesProductos()
                     self.vOP.darValores(self.listaBusqueda[i[1]])
+                    self.vOP.darMarca(self.listaMarca.lista)
+                    self.vOP.darProvedor(self.listaProveedor.lista)
                     self.vOP.show()
 
     def botonesSistema(self,f):

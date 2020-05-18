@@ -40,7 +40,8 @@ class ListaObjetos:
                 self.lista.append(Proveedor(i[0],i[1],i[2],i[3],
                                             i[4],i[5],i[6],i[7],
                                             i[8],i[9]))
-
+        elif self.tabla is "addDetalleCompar":
+            self.lista = list()
 
     def busqueda(self,valor):
         listatmp = []
@@ -53,9 +54,14 @@ class ListaObjetos:
                         listatmp.append(li)
         return listatmp
 
-
+    def addCompra(self,ltmp):
+        if self.lista.count() < 0:
+            self.lista.append(DetalleCompra(ltmp[0], ltmp[1], ltmp[2], ltmp[3]))
+        print(self.lista)
 
     def actualizarListaBD(self):
         self.listarObjetos()
 
+    def limpiar(self):
+        self.lista.clear()
 
