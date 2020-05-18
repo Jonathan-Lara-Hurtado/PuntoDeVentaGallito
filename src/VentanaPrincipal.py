@@ -25,7 +25,7 @@ from VentanaLogin import VentanaLogin
 from VentanaProveedor import VentanaAgregarProveedor
 from VentanaAgregarEmpleado import VentanaAgregarEmpleado
 from Herramientas.ListaObjeto import ListaObjetos
-
+from Herramientas.Modelos import DetalleCompra
 
 
 class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
@@ -45,7 +45,6 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.listaCarrito = ListaObjetos(tabla="addDetalleCompar")
         self.listaCarrito.listarObjetos()
         self.listaTmp = []
-        
 
 
         self.listaBusqueda =[]
@@ -53,6 +52,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.btnBloquear.clicked.connect(self.bloquearTerminal)
         self.btnAddProducto.clicked.connect(self.eventoAgregarCarrito)
         self.btnQuitarProducto.clicked.connect(self.eventoQuitarCarrito)
+        self.btnCancelarPago.clicked.connect(self.eventoCancelarCarrito)
         #region Menubar
         self.BarraMenu.triggered[QAction].connect(self.eventoBarraMenu)
         #endregion
@@ -69,8 +69,15 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.inicio()
 
     def eventoAgregarCarrito(self):
-        print(self.tablaProductosFila)
+        tmp = [0,self.listaTmp.idproducto,
+               self.listaTmp.precioventa,1]
+        self.listaCarrito.addCompra(tmp)
+        self.cargarDatosTablaVentas(lista = self.listaCarrito.lista)
 
+    def eventoCancelarCarrito(self):
+        self.listaCarrito.limpiar()
+        self.tablaProductosVenta.clear()
+        self.tablaProductosVenta.setRowCount(0)
 
     def eventoQuitarCarrito(self):
         print("quito")
@@ -113,9 +120,10 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.vl.mensajeError.setText("Error de autentificacion")
 
     def clickTablaProductos(self,t,r):
+        id = self.tablaProductos.item(t,0).text()
+        self.listaTmp= self.listaProductos.busquedaProducto(id)
 
-        #print(self.tablaProductos.item(t,0).text())
-        #self.tablaProductosFila = t
+
 
     def senaltabla(self,s):
         print(s)
@@ -175,6 +183,25 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.listaBusqueda = self.listaProductos.busqueda(r)
         self.cargarDatosTablaProductos(lista=self.listaBusqueda)
 
+
+    def cargarDatosTablaVentas(self, lista =""):
+        lista = lista
+        self.tablaProductosVenta.setRowCount(0)
+        contadorR = 0
+        for row in lista:
+            self.tablaProductosVenta.insertRow(contadorR)
+            self.tablaProductosVenta.setItem(contadorR, 0, QTableWidgetItem(str(row.idventa)))
+            self.tablaProductosVenta.setItem(contadorR, 1, QTableWidgetItem(str(row.idproducto)))
+            self.tablaProductosVenta.setItem(contadorR, 2, QTableWidgetItem(str(row.cantidad)))
+            self.tablaProductosVenta.setItem(contadorR, 3, QTableWidgetItem(str(row.precio)))
+            self.tablaProductosVenta.setItem(contadorR, 4, QTableWidgetItem(str(row.subtotal)))
+
+            contadorR += 1
+
+        self.repaint()
+        self.update()
+        texto ="<html>"+"<body>"+"<p>"+"<span style="+ "font-weight:600;>"+str(self.listaCarrito.totalPrecio())+"</span>"+"</p>"+"</body>"+"</html>"
+        self.txtPrecioFinal.setText(texto)
 
     def cargarDatosTablaProductos(self, lista = ""):
         if lista == "":

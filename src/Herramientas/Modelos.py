@@ -84,7 +84,7 @@ class Producto:
     # endregion
 
     def __str__(self):
-        return self.nombre
+        return str(self.nombreproducto)
 
     def listarAtributos(self):
         return [self.idproducto,self.idmarca,

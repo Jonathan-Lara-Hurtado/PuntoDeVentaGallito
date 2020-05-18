@@ -49,15 +49,49 @@ class ListaObjetos:
             return self.lista
         else:
             for li in self.lista:
-                for li2 in li.__dict__:
-                    if valor == str(li.__dict__[li2]):
-                        listatmp.append(li)
+                if valor == str(li.idproducto) or valor == str(li.nombreproducto) or valor == str(li.codigoBarra):
+                    listatmp.append(li)
         return listatmp
 
+
+    def busquedaProducto(self,valor):
+        if valor is "":
+            return -1
+        else:
+            for li in self.lista:
+                if valor == str(li.idproducto) or valor == str(li.codigoBarra):
+                    return li
+
+
+    def busquedaDetalle(self,valor):
+        index = -1
+        indexAprobatorio = -1
+        for li in self.lista:
+            index = index + 1
+            if valor == li.idproducto:
+                indexAprobatorio = index
+
+        return indexAprobatorio
+
+
     def addCompra(self,ltmp):
-        if self.lista.count() < 0:
+        if self.lista == []:
             self.lista.append(DetalleCompra(ltmp[0], ltmp[1], ltmp[2], ltmp[3]))
-        print(self.lista)
+        else:
+            index =self.busquedaDetalle(ltmp[1])
+            if index != -1:
+                existenciA =self.lista[index].cantidad
+                self.lista[index] = DetalleCompra(ltmp[0],ltmp[1],ltmp[2],existenciA+ltmp[3])
+            else:
+                self.lista.append(DetalleCompra(ltmp[0], ltmp[1], ltmp[2], ltmp[3]))
+
+
+
+    def totalPrecio(self):
+        suma=0
+        for li in self.lista:
+            suma = suma + li.subtotal
+        return suma
 
     def actualizarListaBD(self):
         self.listarObjetos()

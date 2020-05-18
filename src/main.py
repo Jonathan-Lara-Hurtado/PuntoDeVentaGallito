@@ -34,7 +34,7 @@ class VentanaSplash(QMainWindow , Ui_SplashScreen):
                            "Hackeando bitacora de la uaem",
                            ".............................."
                            ]
-        if(s != 10):
+        if(s != 2):
             self.txtstatusBar.setText(random.choice(listaCargaDatos))
         else:
             self.hide()

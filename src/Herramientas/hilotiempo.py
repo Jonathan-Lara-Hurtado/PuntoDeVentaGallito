@@ -10,7 +10,7 @@ class HiloTiempo(QThread):
 
 
     def run(self):
-        while self.i < 10:
+        while self.i < 2:
             self.i = self.i +1
             self.signal.emit(self.i)
             QThread.sleep(1)
