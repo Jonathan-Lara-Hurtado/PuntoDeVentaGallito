@@ -18,8 +18,14 @@ class VentanaConfirmacionPago(QDialog, Ui_VentanaConfirmacionUi):
         self.setupUi(self)
         self.btnCancelar.clicked.connect(self.cerrar)
         self.btnAceptar.clicked.connect(self.eventoAceptar)
+        self.listaDetalles = []
+
+    def darListaDetalles(self,v):
+        self.listaDetalles = v
 
     def eventoAceptar(self):
+        print(self.listaDetalles.iva)
+
         self.senal.emit()
         self.close()
 

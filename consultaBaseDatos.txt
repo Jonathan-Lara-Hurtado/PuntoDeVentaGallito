@@ -32,7 +32,6 @@ idventa int primary key auto_increment,
 idempleado int,
 fechaventa date,
 subtotal double,
-descuento double,
 iva double,
 total double,
 foreign key (idempleado) references empleado(idempleado));
