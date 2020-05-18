@@ -78,6 +78,15 @@ class Ui_VentanaAgregarProductosGui(object):
 "selection-background-color: rgb(85, 87, 83);")
         self.comboMarca.setObjectName("comboMarca")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.comboMarca)
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_2.setObjectName("label_2")
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.label_2)
+        self.comboProveedor = QtWidgets.QComboBox(self.centralwidget)
+        self.comboProveedor.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"selection-background-color: rgb(85, 87, 83);")
+        self.comboProveedor.setObjectName("comboProveedor")
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.comboProveedor)
         self.verticalLayout.addLayout(self.formLayout)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -110,6 +119,7 @@ class Ui_VentanaAgregarProductosGui(object):
         self.label_6.setText(_translate("VentanaAgregarProductosGui", "Stock:"))
         self.label_7.setText(_translate("VentanaAgregarProductosGui", "Precio:"))
         self.label_8.setText(_translate("VentanaAgregarProductosGui", "Marca"))
+        self.label_2.setText(_translate("VentanaAgregarProductosGui", "Proveedor"))
         self.btnAAgregar.setText(_translate("VentanaAgregarProductosGui", "Agregar"))
         self.btnACancelar.setText(_translate("VentanaAgregarProductosGui", "Cancelar"))
 

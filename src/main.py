@@ -20,7 +20,7 @@ class VentanaSplash(QMainWindow , Ui_SplashScreen):
     def iniciar(self):
         self.centrarPantalla()
         self.quitarBarraTitulo()
-        self.principal = VentanaPrincipal()
+#        self.principal = VentanaPrincipal()
         #region hiloTiempo
         self.hilotiempo = HiloTiempo()
         self.hilotiempo.signal.connect(self.contador)
@@ -38,7 +38,8 @@ class VentanaSplash(QMainWindow , Ui_SplashScreen):
             self.txtstatusBar.setText(random.choice(listaCargaDatos))
         else:
             self.hide()
-#            self.principal.showFullScreen()
+            self.principal = VentanaPrincipal()
+            self.principal.showFullScreen()
             self.principal.show()
 
     def centrarPantalla(self):

@@ -6,6 +6,7 @@ from PyQt5.QtCore import *
 from VentanasGui.VentanaAgregarMarcaGui import Ui_VentanaAgregarMarcaGui
 from Herramientas.Modelos import Marca
 
+from Herramientas.Conector import ConexionBd
 
 class VentanaAgregarMarca(QMainWindow , Ui_VentanaAgregarMarcaGui):
     senal = pyqtSignal()
@@ -17,6 +18,7 @@ class VentanaAgregarMarca(QMainWindow , Ui_VentanaAgregarMarcaGui):
         self.btnCancelar.clicked.connect(self.eventoCancelar)
         self.marca={}
         self.btnAgregar.clicked.connect(self.eventoAceptar)
+        self.con = ConexionBd()
 
     def iniciar(self):
         self.centrarPantalla()
@@ -39,7 +41,10 @@ class VentanaAgregarMarca(QMainWindow , Ui_VentanaAgregarMarcaGui):
         self.close()
 
     def eventoAceptar(self):
-        m = Marca(marca=self.txtMarca.text())
-        m.alta()
+        self.con.insertarMarca(self.txtMarca.text())
         self.senal.emit()
         self.close()
+      #  m = Marca(marca=self.txtMarca.text())
+       # m.alta()
+        #self.senal.emit()
+        #self.close()

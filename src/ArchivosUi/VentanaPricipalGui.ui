@@ -94,7 +94,7 @@ color: rgb(238, 238, 236);</string>
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="btnAddProducto">
           <property name="text">
            <string/>
           </property>
@@ -111,7 +111,7 @@ color: rgb(238, 238, 236);</string>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="btnQuitarProducto">
           <property name="text">
            <string/>
           </property>
@@ -128,7 +128,7 @@ color: rgb(238, 238, 236);</string>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="btnBloquear">
           <property name="text">
            <string/>
           </property>
@@ -323,7 +323,7 @@ selection-background-color: rgb(52, 101, 164);</string>
      </property>
      <addaction name="actionproductoalta"/>
      <addaction name="actionMarcaalta"/>
-     <addaction name="actionCategoriasalta"/>
+     <addaction name="actionProveedor"/>
     </widget>
     <addaction name="menualta"/>
    </widget>
@@ -393,6 +393,11 @@ selection-background-color: rgb(52, 101, 164);</string>
   <action name="actionCategoriasalta">
    <property name="text">
     <string>Categorias</string>
+   </property>
+  </action>
+  <action name="actionProveedor">
+   <property name="text">
+    <string>Proveedor</string>
    </property>
   </action>
  </widget>

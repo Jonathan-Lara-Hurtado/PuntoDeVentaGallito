@@ -1,4 +1,5 @@
 from .ConexionBD import BD
+from .Conector import ConexionBd
 from .Modelos import *
 
 class ListaObjetos:
@@ -26,13 +27,20 @@ class ListaObjetos:
     def listarObjetos(self):
         self.lista.clear()
         if self.tabla is "marca":
-            bd = BD(tabla=self.tabla)
-            for i in bd.consulta():
+            bd = ConexionBd()
+            for i in bd.datos("select * from "+self.tabla):
                 self.lista.append(Marca(idMarca=i[0],marca=i[1]))
-        elif self.tabla is "productos":
-            bd = BD(tabla=self.tabla)
-            for i in bd.consulta():
-                self.lista.append(Producto(i[1],i[2],i[3],i[4],i[5],i[6],i[0]))
+        elif self.tabla is "producto":
+            bd = ConexionBd()
+            for i in bd.datos("select * from " + self.tabla):
+                self.lista.append(Producto(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7]))
+        elif self.tabla is "proveedor":
+            bd = ConexionBd()
+            for i in bd.datos("select * from " + self.tabla):
+                self.lista.append(Proveedor(i[0],i[1],i[2],i[3],
+                                            i[4],i[5],i[6],i[7],
+                                            i[8],i[9]))
+
 
     def busqueda(self,valor):
         listatmp = []
@@ -44,6 +52,8 @@ class ListaObjetos:
                     if valor == str(li.__dict__[li2]):
                         listatmp.append(li)
         return listatmp
+
+
 
     def actualizarListaBD(self):
         self.listarObjetos()
