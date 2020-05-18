@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>829</width>
-    <height>548</height>
+    <width>1112</width>
+    <height>546</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -201,18 +201,31 @@ color: rgb(238, 238, 236);</string>
                 </property>
                </widget>
               </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_3">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(238, 238, 236);</string>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;IVA&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="txtIva">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(238, 238, 236);</string>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;-------------&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </item>
            </layout>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit_2">
-          <property name="styleSheet">
-           <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0199005 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255));</string>
-          </property>
-         </widget>
         </item>
         <item>
          <widget class="QTableWidget" name="tablaProductosVenta">
@@ -237,12 +250,12 @@ color: rgb(238, 238, 236);</string>
           </column>
           <column>
            <property name="text">
-            <string>Precio</string>
+            <string>Precio Venta</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Subtotal</string>
+            <string>Precio Total</string>
            </property>
           </column>
          </widget>
@@ -283,7 +296,7 @@ color: rgb(238, 238, 236);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>829</width>
+     <width>1112</width>
      <height>31</height>
     </rect>
    </property>
@@ -325,6 +338,7 @@ selection-background-color: rgb(52, 101, 164);</string>
      <addaction name="actionMarcaalta"/>
      <addaction name="actionProveedor"/>
      <addaction name="actionEmpleado"/>
+     <addaction name="actionIva"/>
     </widget>
     <addaction name="menualta"/>
    </widget>
@@ -404,6 +418,11 @@ selection-background-color: rgb(52, 101, 164);</string>
   <action name="actionEmpleado">
    <property name="text">
     <string>Empleado</string>
+   </property>
+  </action>
+  <action name="actionIva">
+   <property name="text">
+    <string>Iva</string>
    </property>
   </action>
  </widget>

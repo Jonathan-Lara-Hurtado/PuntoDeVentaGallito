@@ -7,6 +7,15 @@ class ListaObjetos:
     def __init__(self, tabla):
         self.__tabla = tabla
         self.__lista = []
+        self.__iva = 0
+
+    @property
+    def iva(self):
+        return self.__iva
+    
+    @iva.setter
+    def iva(self, value):
+        self.__iva = value
 
     @property
     def tabla(self):
@@ -85,13 +94,29 @@ class ListaObjetos:
             else:
                 self.lista.append(DetalleCompra(ltmp[0], ltmp[1], ltmp[2], ltmp[3]))
 
+    def quitarCompra(self,ltmp):
+        tmp = []
+        index = self.busquedaDetalle(ltmp[1])
+        if index != -1:
+            existenciA = self.lista[index].cantidad
+            self.lista[index] = DetalleCompra(ltmp[0], ltmp[1], ltmp[2], existenciA - ltmp[3])
+            if existenciA < 2:
+                i = 0
+                while i < len(self.lista):
+
+                    if i != index:
+                        tmp.append(self.lista[i])
+                    i = i+1
+                self.lista = tmp
 
 
     def totalPrecio(self):
         suma=0
+        ivatmp = 0
         for li in self.lista:
             suma = suma + li.subtotal
-        return suma
+            ivatmp = suma * (self.iva/100)
+        return suma + ivatmp
 
     def actualizarListaBD(self):
         self.listarObjetos()

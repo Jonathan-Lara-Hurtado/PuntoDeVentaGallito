@@ -54,6 +54,24 @@ class ConexionBd:
         self.cnx.commit()
         cursor.close()
 
+    def insertarIva(self,iva):
+        r = self.datos("select * from iva");
+        if r.fetchall() == []:
+            cursor = self.cnx.cursor()
+            add_marca = ("Insert into iva"
+                     "(iva)"
+                     "values ('" +str(iva) + "')")
+            cursor.execute(add_marca)
+            self.cnx.commit()
+            cursor.close()
+        else:
+            cursor = self.cnx.cursor()
+            add_marca = ("update iva set iva ="+str(iva)+" where idiva = 1")
+            cursor.execute(add_marca)
+            self.cnx.commit()
+            cursor.close()
+
+
     def usuarioValidacion(self,correo,password):
         query = ("select * from empleado"
                  " where correo = %s and contraseña = %s ")
@@ -109,3 +127,12 @@ class ConexionBd:
 #con.insertarProducto(1,1,"Yakult","3312323",32,"Yakul con shirota",100)
 #con.imprimirDatos("select * from producto")
 #con.cerrarConexion()
+
+#iva
+#con = ConexionBd()
+#con.insertarIva(3)
+#r = con.datos("select * from iva").fetchall()[0][1]
+#print(r)
+#con.insertarIva(6)
+#r = con.datos("select * from iva").fetchall()[0][1]
+#print(r)

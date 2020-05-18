@@ -22,10 +22,12 @@ from Herramientas.ListaObjeto import ListaObjetos
 from Herramientas.Conector import ConexionBd
 from PyQt5.QtWidgets import QPushButton
 from VentanaLogin import VentanaLogin
+from VentanaConfirmacionPago import VentanaConfirmacionPago
 from VentanaProveedor import VentanaAgregarProveedor
 from VentanaAgregarEmpleado import VentanaAgregarEmpleado
 from Herramientas.ListaObjeto import ListaObjetos
 from Herramientas.Modelos import DetalleCompra
+from VentanaIva import VentanaAgregarIva
 
 
 class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
@@ -33,7 +35,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
     def __init__(self, *args, **kwargs):
         QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
-        self.conexion = ConexionBd()
+
         self.UsuarioInformacion = []
 
         self.listaMarca = ListaObjetos(tabla="marca")
@@ -47,20 +49,23 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.listaTmp = []
 
 
+
         self.listaBusqueda =[]
         self.botenesDescripcion = []
         self.btnBloquear.clicked.connect(self.bloquearTerminal)
         self.btnAddProducto.clicked.connect(self.eventoAgregarCarrito)
         self.btnQuitarProducto.clicked.connect(self.eventoQuitarCarrito)
         self.btnCancelarPago.clicked.connect(self.eventoCancelarCarrito)
+        self.btnPago.clicked.connect(self.eventoPagar)
         #region Menubar
         self.BarraMenu.triggered[QAction].connect(self.eventoBarraMenu)
         #endregion
         # region EventoClickTablaProductos
         self.tablaProductos.cellClicked.connect(self.clickTablaProductos)
         self.tablaProductosFila = -1
+        self.estadoTablaProducto = True
         #self.tablaProductos.clicked.connect(self.senaltabla)
-
+        self.tablaProductosVenta.cellClicked.connect(self.clicktablaProductosVenta)
         # endregion
         self.txtBusquedaProductos.textChanged.connect(self.eventoBusqueda)
         self.vl = VentanaLogin()
@@ -68,19 +73,45 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.vl.btnAceptar.clicked.connect(self.eventoLogin)
         self.inicio()
 
+    def actualizaIva(self):
+        self.conexion = ConexionBd()
+        ivatmp = int(self.conexion.datos("select * from iva").fetchall()[0][1])
+        print(ivatmp)
+        self.listaCarrito.iva = ivatmp
+        self.txtIva.setText("<html>" + "<body>" + "<p>" + "<span style=" + "font-weight:600;>" + str(
+            self.listaCarrito.iva) + "% </span>" + "</p>" + "</body>" + "</html>")
+
+
+    def eventoPagar(self):
+        vConfirmacion = VentanaConfirmacionPago()
+        vConfirmacion.senal.connect(self.eventoCancelarCarrito)
+        vConfirmacion.exec_()
+
     def eventoAgregarCarrito(self):
-        tmp = [0,self.listaTmp.idproducto,
-               self.listaTmp.precioventa,1]
-        self.listaCarrito.addCompra(tmp)
-        self.cargarDatosTablaVentas(lista = self.listaCarrito.lista)
+        if self.estadoTablaProducto:
+            tmp = [0,self.listaTmp.idproducto,
+                   self.listaTmp.precioventa,1]
+            self.listaCarrito.addCompra(tmp)
+            self.cargarDatosTablaVentas(lista = self.listaCarrito.lista)
+        else:
+            tmp = [0, self.listaTmp.idproducto,
+                   self.listaTmp.precioventa, 1]
+            self.listaCarrito.addCompra(tmp)
+            self.cargarDatosTablaVentas(lista=self.listaCarrito.lista)
+
 
     def eventoCancelarCarrito(self):
         self.listaCarrito.limpiar()
         self.tablaProductosVenta.clear()
         self.tablaProductosVenta.setRowCount(0)
+        self.txtPrecioFinal.setText("<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">-------------</span></p></body></html>")
 
     def eventoQuitarCarrito(self):
-        print("quito")
+        if self.estadoTablaProducto == False:
+            tmp = [0, self.listaTmp.idproducto,
+                   self.listaTmp.precioventa, 1]
+            self.listaCarrito.quitarCompra(tmp)
+            self.cargarDatosTablaVentas(lista=self.listaCarrito.lista)
 
     def bloquearTerminal(self,t):
         self.sesiones()
@@ -114,14 +145,23 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.botonesSistema(True)
             self.UsuarioInformacion = resultado[1][0]
             self.cargarDatosTablaProductos()
+            self.actualizaIva()
             if self.UsuarioInformacion[5] == "Gerente":
                 self.BarraMenu.show()
         else:
             self.vl.mensajeError.setText("Error de autentificacion")
 
     def clickTablaProductos(self,t,r):
+        self.tablaProductosVenta.clearSelection()
         id = self.tablaProductos.item(t,0).text()
         self.listaTmp= self.listaProductos.busquedaProducto(id)
+        self.estadoTablaProducto = True
+
+    def clicktablaProductosVenta(self,t,r):
+        self.tablaProductos.clearSelection()
+        id = self.tablaProductosVenta.item(t, 1).text()
+        self.listaTmp= self.listaProductos.busquedaProducto(id)
+        self.estadoTablaProducto = False
 
 
 
@@ -151,7 +191,10 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         elif res == "actionEmpleado":
             self.vEmpleado = VentanaAgregarEmpleado()
             self.vEmpleado.show()
-
+        elif res == "actionIva":
+            self.vIva = VentanaAgregarIva()
+            self.vIva.senal.connect(self.actualizaIva)
+            self.vIva.show()
         elif res == "actionAcerca_de":
             self.d = VentanaAcercaDe()
             self.d.show()
@@ -200,8 +243,15 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
         self.repaint()
         self.update()
-        texto ="<html>"+"<body>"+"<p>"+"<span style="+ "font-weight:600;>"+str(self.listaCarrito.totalPrecio())+"</span>"+"</p>"+"</body>"+"</html>"
-        self.txtPrecioFinal.setText(texto)
+        costoFinal = self.listaCarrito.totalPrecio()
+
+
+        if costoFinal > 0:
+            texto ="<html>"+"<body>"+"<p>"+"<span style="+ "font-weight:600;>"+str(costoFinal) +"</span>"+"</p>"+"</body>"+"</html>"
+            self.txtPrecioFinal.setText(texto)
+        else:
+            self.txtPrecioFinal.setText("<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">-------------</span></p></body></html>")
+         #   self.txtIva.setText("<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">-------------</span></p></body></html>")
 
     def cargarDatosTablaProductos(self, lista = ""):
         if lista == "":
@@ -227,27 +277,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.repaint()
         self.update()
 
-    """
-    def cargarDatosTablaProductos(self):
-        self.tablaProductos.setRowCount(0)
-        self.botenesDescripcion.clear()
-        contadorR =0
-        for row in self.listaProductos.lista:
-            b = QPushButton()
-            b.setText("Opciones")
-            b.setObjectName("btn"+str(contadorR))
-            b.clicked.connect(self.check_clicked)
-            self.botenesDescripcion.append([b,contadorR])
-            self.tablaProductos.insertRow(contadorR)
-            self.tablaProductos.setItem(contadorR,0,QTableWidgetItem(str(row.id)))
-            self.tablaProductos.setItem(contadorR, 1, QTableWidgetItem(str(row.nombre)))
-            self.tablaProductos.setItem(contadorR, 2, QTableWidgetItem(str(row.stock)))
-            self.tablaProductos.setItem(contadorR, 3, QTableWidgetItem(str(row.precio)))
-            self.tablaProductos.setCellWidget(contadorR, 4, b)
-            contadorR += 1
-        self.repaint()
-        self.update()
-    """
+
 
     def check_clicked(self):
 #        print("{}%".format(self.sender().objectName()))

@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_VentanaPricipal(object):
     def setupUi(self, VentanaPricipal):
         VentanaPricipal.setObjectName("VentanaPricipal")
-        VentanaPricipal.resize(829, 548)
+        VentanaPricipal.resize(1112, 546)
         VentanaPricipal.setStyleSheet("background-color: rgb(46, 52, 54);")
         self.centralwidget = QtWidgets.QWidget(VentanaPricipal)
         self.centralwidget.setObjectName("centralwidget")
@@ -102,13 +102,17 @@ class Ui_VentanaPricipal(object):
         self.txtPrecioFinal.setStyleSheet("color: rgb(238, 238, 236);")
         self.txtPrecioFinal.setObjectName("txtPrecioFinal")
         self.gridLayout.addWidget(self.txtPrecioFinal, 0, 1, 1, 1)
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setStyleSheet("color: rgb(238, 238, 236);")
+        self.label_3.setObjectName("label_3")
+        self.gridLayout.addWidget(self.label_3, 1, 0, 1, 1)
+        self.txtIva = QtWidgets.QLabel(self.centralwidget)
+        self.txtIva.setStyleSheet("color: rgb(238, 238, 236);")
+        self.txtIva.setObjectName("txtIva")
+        self.gridLayout.addWidget(self.txtIva, 1, 1, 1, 1)
         self.verticalLayout_4.addLayout(self.gridLayout)
         self.horizontalLayout_3.addLayout(self.verticalLayout_4)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0199005 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255));")
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.verticalLayout_3.addWidget(self.lineEdit_2)
         self.tablaProductosVenta = QtWidgets.QTableWidget(self.centralwidget)
         self.tablaProductosVenta.setStyleSheet("background-color: rgb(85, 87, 83);\n"
 "color: rgb(238, 238, 236);")
@@ -142,7 +146,7 @@ class Ui_VentanaPricipal(object):
         self.gridLayout_3.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         VentanaPricipal.setCentralWidget(self.centralwidget)
         self.BarraMenu = QtWidgets.QMenuBar(VentanaPricipal)
-        self.BarraMenu.setGeometry(QtCore.QRect(0, 0, 829, 31))
+        self.BarraMenu.setGeometry(QtCore.QRect(0, 0, 1112, 31))
         self.BarraMenu.setStyleSheet("font: 75 16pt \"URW Bookman L\";\n"
 "\n"
 "color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
@@ -193,6 +197,8 @@ class Ui_VentanaPricipal(object):
         self.actionProveedor.setObjectName("actionProveedor")
         self.actionEmpleado = QtWidgets.QAction(VentanaPricipal)
         self.actionEmpleado.setObjectName("actionEmpleado")
+        self.actionIva = QtWidgets.QAction(VentanaPricipal)
+        self.actionIva.setObjectName("actionIva")
         self.menuAyuda.addAction(self.actionAcerca_de)
         self.menuAyuda.addSeparator()
         self.menuAyuda.addAction(self.actionDocumentacion)
@@ -201,6 +207,7 @@ class Ui_VentanaPricipal(object):
         self.menualta.addAction(self.actionMarcaalta)
         self.menualta.addAction(self.actionProveedor)
         self.menualta.addAction(self.actionEmpleado)
+        self.menualta.addAction(self.actionIva)
         self.menuAlta.addAction(self.menualta.menuAction())
         self.menuHerramientas.addAction(self.actionEscanerApp)
         self.menuHerramientas.addSeparator()
@@ -228,6 +235,8 @@ class Ui_VentanaPricipal(object):
         self.label_2.setText(_translate("VentanaPricipal", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Venta</span></p></body></html>"))
         self.label_4.setText(_translate("VentanaPricipal", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600;\">Total</span></p></body></html>"))
         self.txtPrecioFinal.setText(_translate("VentanaPricipal", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">-------------</span></p></body></html>"))
+        self.label_3.setText(_translate("VentanaPricipal", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600;\">IVA</span></p></body></html>"))
+        self.txtIva.setText(_translate("VentanaPricipal", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">-------------</span></p></body></html>"))
         item = self.tablaProductosVenta.horizontalHeaderItem(0)
         item.setText(_translate("VentanaPricipal", "ID"))
         item = self.tablaProductosVenta.horizontalHeaderItem(1)
@@ -235,9 +244,9 @@ class Ui_VentanaPricipal(object):
         item = self.tablaProductosVenta.horizontalHeaderItem(2)
         item.setText(_translate("VentanaPricipal", "Cantidad"))
         item = self.tablaProductosVenta.horizontalHeaderItem(3)
-        item.setText(_translate("VentanaPricipal", "Precio"))
+        item.setText(_translate("VentanaPricipal", "Precio Venta"))
         item = self.tablaProductosVenta.horizontalHeaderItem(4)
-        item.setText(_translate("VentanaPricipal", "Subtotal"))
+        item.setText(_translate("VentanaPricipal", "Precio Total"))
         self.btnPago.setText(_translate("VentanaPricipal", "Pago"))
         self.btnCancelarPago.setText(_translate("VentanaPricipal", "Cancelar Compra"))
         self.menuAyuda.setTitle(_translate("VentanaPricipal", "Ayuda"))
@@ -256,6 +265,7 @@ class Ui_VentanaPricipal(object):
         self.actionCategoriasalta.setText(_translate("VentanaPricipal", "Categorias"))
         self.actionProveedor.setText(_translate("VentanaPricipal", "Proveedor"))
         self.actionEmpleado.setText(_translate("VentanaPricipal", "Empleado"))
+        self.actionIva.setText(_translate("VentanaPricipal", "Iva"))
 
 import resource_rc
 
