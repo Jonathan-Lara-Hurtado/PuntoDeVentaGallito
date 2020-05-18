@@ -1,0 +1,63 @@
+drop database gallitonegro;
+create database gallitonegro;
+
+use gallitonegro;
+
+create table proveedor(
+idproveedor int primary key auto_increment,
+nombreCompany varchar(45),
+nombreContacto varchar(45),
+direccion varchar(45),
+ciudad varchar(45),
+region varchar(45),
+codigopostal int,
+pais varchar(45),
+telefono long,
+fax varchar(45));
+
+create table empleado(
+idempleado int primary key auto_increment,
+nombre varchar(45),
+apellidopaterno varchar(45),
+apellidomaterno varchar(45),
+edad int,
+tipoempleado varchar(45),
+contraseña varchar(45),
+fechaContratacion date,
+direccion varchar(45),
+correo varchar(45));
+
+create table venta(
+idventa int primary key auto_increment,
+idempleado int,
+idcliente int,
+fechaventa date,
+subtotal double,
+descuento double,
+iva double,
+total double,
+foreign key (idempleado) references empleado(idempleado));
+
+create table marca(
+idmarca int primary key auto_increment,
+Marca varchar(45));
+
+create table producto(
+idproducto int primary key auto_increment,
+idmarca int,
+idProvedor int,
+nombreproducto varchar(45),
+codigoBarra varchar(45),
+precioventa double,
+descripcion varchar(45),
+existencia int,
+foreign key(idmarca) references marca(idmarca),
+foreign key(idProvedor) references proveedor(idproveedor));
+
+create table detalleventa(
+idventa int,
+idproducto int,
+precio double,
+cantidad int,
+foreign key(idventa) references venta(idventa),
+foreign key(idproducto) references producto(idproducto));
