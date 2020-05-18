@@ -44,5 +44,5 @@ class VentanaAgregarEmpleado(QMainWindow, Ui_VentanaAgregarEmpleadoGui):
         con.insertarUsuario(self.txtNombre.text(),self.txtPaterno.text(),
                             self.txtMaterno.text(),edad,
                             self.txtTipoEmpleado.text(),self.txtPassword.text(),
-                            datetime.today(),self.txtDireccion.text(),self.txtCorreo.text())
+                            date.today(),self.txtDireccion.text(),self.txtCorreo.text())
         self.close()

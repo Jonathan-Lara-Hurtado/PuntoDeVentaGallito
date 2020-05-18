@@ -13,24 +13,31 @@ class ConexionBd:
 
 
     def insertarVenta(self,idventa,idempleado,fechaventa,subtotal,iva,total):
-        cursor = self.cnx.cursor()
-        add_Venta = ("Insert into venta"
-                        "(idempleado,fechaventa,subtotal,iva,subtotal,total)"
-                        "values (%s , %s, %s, %s, %s, %s)")
-        data_Venta = (idventa, idempleado, fechaventa, subtotal, iva, total)
-        cursor.execute(add_Venta, data_Venta)
-        self.cnx.commit()
-        cursor.close()
+        try:
+            cursor = self.cnx.cursor()
+            add_Venta = ("Insert into venta"
+                         "(idventa,idempleado,fechaventa,subtotal,iva,total)"
+                         "values (%s ,%s , %s, %s, %s, %s)")
+            data_Venta = (idventa, idempleado, fechaventa, subtotal, iva, total)
+            cursor.execute(add_Venta, data_Venta)
+            self.cnx.commit()
+            cursor.close()
+            self.cnx.close()
+            return False
+        except mysql.connector.Error as err:
+            return True
+
 
     def insertardetalleventa(self, idventa, idproducto, precio, cantidad):
         cursor = self.cnx.cursor()
-        add_DetalleVenta = ("Insert into venta"
+        add_DetalleVenta = ("Insert into detalleventa"
                      "(idventa,idproducto,precio,cantidad)"
                      "values (%s , %s, %s, %s)")
         data_detalleVenta = (idventa, idproducto, precio, cantidad)
         cursor.execute(add_DetalleVenta, data_detalleVenta)
         self.cnx.commit()
         cursor.close()
+        self.cnx.close()
 
     def insertarProducto(self,idmarca,idProvedor,nombreproducto,codigoBarra,precioventa,descripcion,existencia):
         cursor = self.cnx.cursor()
@@ -123,7 +130,7 @@ class ConexionBd:
 
 #usuario
 #con = ConexionBd()
-#con.insertarUsuario("Jonathan", "Lara", "Hurtado", 18, "Gerente", "12345", date(1997,7,31), "Av.Francisco Villa Mz.933 Lt.8","jonabimael@hotmail.com")
+#con.insertarUsuario("Jonathan", "Lara", "Hurtado", 18, "Gerente", "12345", date(1997,7,31), "Av.Francisco Villa Mz.933 Lt.8","root")
 #con.datos("select * from empleado")
 #print(con.usuarioValidacion("jonabimael@hotmail.com", "1234"))
 #con.cerrarConexion()
@@ -155,3 +162,9 @@ class ConexionBd:
 #con.insertarIva(6)
 #r = con.datos("select * from iva").fetchall()[0][1]
 #print(r)
+
+
+#detalle
+#con = ConexionBd()
+#con.insertardetalleventa(1,2,32,11)
+#con.cerrarConexion()

@@ -28,7 +28,7 @@ direccion varchar(45),
 correo varchar(45));
 
 create table venta(
-idventa int primary key auto_increment,
+idventa int primary key,
 idempleado int,
 fechaventa date,
 subtotal double,
@@ -58,9 +58,12 @@ foreign key(idmarca) references marca(idmarca),
 foreign key(idProvedor) references proveedor(idproveedor));
 
 create table detalleventa(
+idDetalle int primary key auto_increment,
 idventa int,
 idproducto int,
 precio double,
 cantidad int,
 foreign key(idventa) references venta(idventa),
 foreign key(idproducto) references producto(idproducto));
+
+insert into iva (iva) values (15);

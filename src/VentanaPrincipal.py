@@ -86,6 +86,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         vConfirmacion = VentanaConfirmacionPago()
         vConfirmacion.senal.connect(self.eventoCancelarCarrito)
         vConfirmacion.darListaDetalles(self.listaCarrito)
+        vConfirmacion.darUsuario(self.UsuarioInformacion)
         vConfirmacion.exec_()
 
     def eventoAgregarCarrito(self):
