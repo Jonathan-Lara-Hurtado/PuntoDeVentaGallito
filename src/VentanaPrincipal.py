@@ -30,7 +30,7 @@ from Herramientas.ListaObjeto import ListaObjetos
 from Herramientas.Modelos import DetalleCompra
 from VentanaIva import VentanaAgregarIva
 from Herramientas.Grafica import GraficaVentas
-
+from Herramientas.Generarpdf import CrearListaProductos
 
 class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
@@ -88,7 +88,13 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
     def eventoExportar(self):
         self.file = QFileDialog()
         filame = self.file.getSaveFileName(self)
-        print(filame)
+
+
+        archivo = CrearListaProductos(filame[0])
+        for i in self.listaProductos.lista:
+            a = (i.idproducto,i.idProvedor,i.nombreproducto,i.codigoBarra,i.precioventa,i.existencia)
+            archivo.addData(a)
+        archivo.generar()
 
     def eventoTicket(self):
         self.eventoCancelarCarrito()

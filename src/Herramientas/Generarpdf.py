@@ -81,6 +81,61 @@ class CrearTicket:
     def generar(self):
         self.export_to_pdf(self.data,self.data2)
 
+
+
+class CrearListaProductos:
+    def __init__(self,ruta):
+        self.ruta = ruta
+        self.data= [("idproducto","idProvedor","Nombre","codigoBarra","precioventa","existencia")]
+
+    def addData(self,v):
+        self.data.append(v)
+
+    def grouper(self,iterable, n):
+        args = [iter(iterable)] * n
+        return itertools.zip_longest(*args)
+
+    def export_to_pdf(self,data):
+        c = canvas.Canvas(self.ruta, pagesize=A4)
+        w, h = A4
+        max_rows_per_page = 45
+        # Margin.
+        x_offset = 30
+        y_offset = 120
+        # Space between rows.
+        padding = 15
+        c.setFillColorRGB(0, 0, 0)
+        c.setFont("Helvetica", 30)
+        c.drawString(x_offset, 790, "Gallito Negro")
+
+        c.setFillColorRGB(0, 0, 0)
+        c.setFont("Helvetica", 20)
+        c.drawString(x_offset, 730, "Productos")
+
+        c.setFillColorRGB(0, 0, 0)
+        c.setFont("Helvetica", 12)
+
+        xlist = [x + x_offset for x in [0, 60, 120, 200, 280, 350,420]]
+        ylist = [h - y_offset - i * padding for i in range(max_rows_per_page + 1)]
+
+        for rows in self.grouper(data, max_rows_per_page):
+            rows = tuple(filter(bool, rows))
+            c.grid(xlist, ylist[:len(rows) + 1])
+            for y, row in zip(ylist[:-1], rows):
+                for x, cell in zip(xlist, row):
+                    c.drawString(x + 2, y - padding + 3, str(cell))
+            c.showPage()
+
+
+        c.save()
+
+    def generar(self):
+        self.export_to_pdf(self.data)
+
+#c = CrearListaProductos()
+#c.generar()
+
+
 """
 a = ("1","2","3","4","5")
 b =("11","22","31")
