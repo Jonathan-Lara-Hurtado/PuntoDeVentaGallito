@@ -174,6 +174,8 @@ class Ui_VentanaPricipal(object):
 "color: rgb(255, 255, 255);\n"
 "selection-background-color: rgb(52, 101, 164);")
         self.menuHerramientas.setObjectName("menuHerramientas")
+        self.menuGraficas = QtWidgets.QMenu(self.menuHerramientas)
+        self.menuGraficas.setObjectName("menuGraficas")
         VentanaPricipal.setMenuBar(self.BarraMenu)
         self.statusbar = QtWidgets.QStatusBar(VentanaPricipal)
         self.statusbar.setObjectName("statusbar")
@@ -204,6 +206,8 @@ class Ui_VentanaPricipal(object):
         self.actionEmpleado.setObjectName("actionEmpleado")
         self.actionIva = QtWidgets.QAction(VentanaPricipal)
         self.actionIva.setObjectName("actionIva")
+        self.actionProductos_Vendidos = QtWidgets.QAction(VentanaPricipal)
+        self.actionProductos_Vendidos.setObjectName("actionProductos_Vendidos")
         self.menuAyuda.addAction(self.actionAcerca_de)
         self.menuAyuda.addSeparator()
         self.menuAyuda.addAction(self.actionDocumentacion)
@@ -214,8 +218,10 @@ class Ui_VentanaPricipal(object):
         self.menualta.addAction(self.actionEmpleado)
         self.menualta.addAction(self.actionIva)
         self.menuAlta.addAction(self.menualta.menuAction())
+        self.menuGraficas.addAction(self.actionProductos_Vendidos)
         self.menuHerramientas.addAction(self.actionEscanerApp)
         self.menuHerramientas.addSeparator()
+        self.menuHerramientas.addAction(self.menuGraficas.menuAction())
         self.BarraMenu.addAction(self.menuAlta.menuAction())
         self.BarraMenu.addAction(self.menuHerramientas.menuAction())
         self.BarraMenu.addAction(self.menuAyuda.menuAction())
@@ -259,6 +265,7 @@ class Ui_VentanaPricipal(object):
         self.menuAlta.setTitle(_translate("VentanaPricipal", "BD"))
         self.menualta.setTitle(_translate("VentanaPricipal", "Alta"))
         self.menuHerramientas.setTitle(_translate("VentanaPricipal", "Herramientas"))
+        self.menuGraficas.setTitle(_translate("VentanaPricipal", "Graficas"))
         self.actionAcerca_de.setText(_translate("VentanaPricipal", "Acerca de"))
         self.actionDocumentacion.setText(_translate("VentanaPricipal", "Documentacion"))
         self.actionEscanerApp.setText(_translate("VentanaPricipal", "EscanerApp"))
@@ -272,6 +279,7 @@ class Ui_VentanaPricipal(object):
         self.actionProveedor.setText(_translate("VentanaPricipal", "Proveedor"))
         self.actionEmpleado.setText(_translate("VentanaPricipal", "Empleado"))
         self.actionIva.setText(_translate("VentanaPricipal", "Iva"))
+        self.actionProductos_Vendidos.setText(_translate("VentanaPricipal", "Productos Vendidos"))
 
 import resource_rc
 

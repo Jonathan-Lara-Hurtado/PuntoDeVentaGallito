@@ -363,8 +363,15 @@ selection-background-color: rgb(52, 101, 164);</string>
     <property name="title">
      <string>Herramientas</string>
     </property>
+    <widget class="QMenu" name="menuGraficas">
+     <property name="title">
+      <string>Graficas</string>
+     </property>
+     <addaction name="actionProductos_Vendidos"/>
+    </widget>
     <addaction name="actionEscanerApp"/>
     <addaction name="separator"/>
+    <addaction name="menuGraficas"/>
    </widget>
    <addaction name="menuAlta"/>
    <addaction name="menuHerramientas"/>
@@ -434,6 +441,11 @@ selection-background-color: rgb(52, 101, 164);</string>
   <action name="actionIva">
    <property name="text">
     <string>Iva</string>
+   </property>
+  </action>
+  <action name="actionProductos_Vendidos">
+   <property name="text">
+    <string>Productos Vendidos</string>
    </property>
   </action>
  </widget>

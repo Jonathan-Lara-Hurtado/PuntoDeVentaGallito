@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication
-from  PyQt5.QtWidgets import QMainWindow,QAction,QMenu
+from  PyQt5.QtWidgets import QMainWindow,QAction,QMenu,QFileDialog
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QGridLayout,QWidget,QDesktopWidget
 from PyQt5.QtCore import Qt
@@ -29,6 +29,7 @@ from VentanaAgregarEmpleado import VentanaAgregarEmpleado
 from Herramientas.ListaObjeto import ListaObjetos
 from Herramientas.Modelos import DetalleCompra
 from VentanaIva import VentanaAgregarIva
+from Herramientas.Grafica import GraficaVentas
 
 
 class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
@@ -59,6 +60,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.btnQuitarProducto.clicked.connect(self.eventoQuitarCarrito)
         self.btnCancelarPago.clicked.connect(self.eventoCancelarCarrito)
         self.btnPago.clicked.connect(self.eventoPagar)
+        self.btnExportar.clicked.connect(self.eventoExportar)
         #region Menubar
         self.BarraMenu.triggered[QAction].connect(self.eventoBarraMenu)
         #endregion
@@ -83,6 +85,10 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.txtIva.setText("<html>" + "<body>" + "<p>" + "<span style=" + "font-weight:600;>" + str(
             self.listaCarrito.iva) + "% </span>" + "</p>" + "</body>" + "</html>")
 
+    def eventoExportar(self):
+        self.file = QFileDialog()
+        filame = self.file.getSaveFileName(self)
+        print(filame)
 
     def eventoTicket(self):
         self.eventoCancelarCarrito()
@@ -222,6 +228,9 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         elif res == "actionAcerca_de":
             self.d = VentanaAcercaDe()
             self.d.show()
+        elif res == "actionProductos_Vendidos":
+            self.eventoGraficar()
+
         elif res == "actionDocumentacion":
             self.documentacion = VentanaDocumentacion()
             SO = platform.system()
@@ -238,6 +247,12 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.vHA.show()
         else:
             print("nada")
+
+    def eventoGraficar(self):
+        con = ConexionBd()
+        r = con.ventasMensuales()
+        self.vGrafica = GraficaVentas(datos=r[0],N=r[1],titulo="Compras del Mes: "+r[2])
+        self.vGrafica.show()
 
     def eventoActualizar(self):
         self.listaMarca.actualizarListaBD()

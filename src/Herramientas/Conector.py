@@ -1,6 +1,6 @@
 import mysql.connector
 from datetime import date, datetime, timedelta
-
+import calendar
 
 class ConexionBd:
     def __init__(self,user='gallito',passw='12345',host='127.0.0.1',db='gallitonegro'):
@@ -119,6 +119,55 @@ class ConexionBd:
         cursor.execute(query)
         return cursor
 
+    def ventasMensuales(self):
+        cursor = self.cnx.cursor()
+        query = ("select * from venta"
+                 " where  year(fechaventa)="+str(date.today().year)+" and month(fechaventa)="+str(date.today().month))
+        cursor.execute(query)
+        datos = cursor
+
+        self.datos = datos.fetchall()
+
+        mesRango = calendar.monthrange(date.today().year, date.today().month)
+        self.tmp = []
+        self.contarVentas = 0
+
+        for i in range(1,mesRango[1]+1):
+            self.contarVentas = 0
+            for e in self.datos:
+                if i == e[2].day:
+                    self.contarVentas = self.contarVentas + 1
+            self.tmp.append(self.contarVentas)
+
+        return [self.tmp,mesRango[1],self.nombreMesEspañol(date.today().month)]
+
+    def nombreMesEspañol(self,m):
+        if m == 1:
+            return "Enero"
+        elif m == 2:
+            return "Febrero"
+        elif m == 3:
+            return "Marzo"
+        elif m == 4:
+            return "Abril"
+        elif m == 5:
+            return "Mayo"
+        elif m == 6:
+            return "Junio"
+        elif m == 7:
+            return "Julio"
+        elif m == 8:
+            return "Agosto"
+        elif m == 9:
+            return "Septiembre"
+        elif m == 10:
+            return "Octubre"
+        elif m == 11:
+            return "Noviembre"
+        else:
+            return "Diciembre"
+
+
     def imprimirDatos(self,query):
         cursor = self.cnx.cursor()
         cursor.execute(query)
@@ -167,4 +216,10 @@ class ConexionBd:
 #detalle
 #con = ConexionBd()
 #con.insertardetalleventa(1,2,32,11)
+#con.cerrarConexion()
+
+#fecha = date.today()
+#print(fecha.month)
+#con = ConexionBd()
+#con.ventasMensuales()
 #con.cerrarConexion()
