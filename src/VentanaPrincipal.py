@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QGridLayout,QWidget,QDesktopWidget
 from PyQt5.QtCore import Qt
 from  PyQt5.QtCore import QTimer
 import os
+import subprocess
 import platform
 import random
 from PyQt5.QtCore import QUrl
@@ -50,6 +51,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
 
 
+
         self.listaBusqueda =[]
         self.botenesDescripcion = []
         self.btnBloquear.clicked.connect(self.bloquearTerminal)
@@ -82,12 +84,32 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.listaCarrito.iva) + "% </span>" + "</p>" + "</body>" + "</html>")
 
 
+    def eventoTicket(self):
+        self.eventoCancelarCarrito()
+        self.vTicke = VentanaDocumentacion()
+        SO = platform.system()
+        if SO == 'Linux':
+            self.url = os.path.join(os.getcwd(),"Ticket.pdf")
+            self.url = "file://" + self.url
+            self.libreria = os.path.join(os.getcwd(), "Documentacion","pdfjs" ,"web","viewer.html")
+            self.libreria = "file://" + self.libreria
+        elif SO == 'Windows':
+            self.url = "file:///" + os.getcwd() + "/Documentacion" + "/index.html"
+            self.url = self.url.replace(chr(92), chr(47))
+
+        self.vTicke.setWindowTitle("Ticket de Compra")
+        self.vTicke.NavegadorVisor.load(QUrl.fromUserInput('%s?file=%s' % (self.libreria, self.url)))
+
+        self.vTicke.show()
+
+
     def eventoPagar(self):
         vConfirmacion = VentanaConfirmacionPago()
-        vConfirmacion.senal.connect(self.eventoCancelarCarrito)
+        vConfirmacion.senal.connect(self.eventoTicket)
         vConfirmacion.darListaDetalles(self.listaCarrito)
         vConfirmacion.darUsuario(self.UsuarioInformacion)
         vConfirmacion.exec_()
+
 
     def eventoAgregarCarrito(self):
         if self.estadoTablaProducto:
@@ -104,7 +126,6 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
     def eventoCancelarCarrito(self):
         self.listaCarrito.limpiar()
-        self.tablaProductosVenta.clear()
         self.tablaProductosVenta.setRowCount(0)
         self.txtPrecioFinal.setText("<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">-------------</span></p></body></html>")
 
@@ -173,6 +194,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
     def inicio(self):
         self.BarraMenu.hide()
         self.botonesSistema(False)
+        #self.eventoTicket()
 
     def eventoBarraMenu(self,t):
         res = t.objectName()
