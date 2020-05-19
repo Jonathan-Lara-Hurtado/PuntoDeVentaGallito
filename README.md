@@ -5,6 +5,12 @@ pyuic5 -x <nombre>.ui -o <nombre>.py
 pyrcc5 resource.qrc -o ./Recursos/resource_rc.py
 
 
+###############################################
+Libreria para graficar
+pip3 install matplotlib
+############################################
+
+
 #################################################
 Windows
 #################################################

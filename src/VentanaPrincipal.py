@@ -37,9 +37,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
     def __init__(self, *args, **kwargs):
         QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
-
         self.UsuarioInformacion = []
-
         self.listaMarca = ListaObjetos(tabla="marca")
         self.listaMarca.listarObjetos()
         self.listaProductos = ListaObjetos(tabla="producto")
@@ -49,10 +47,6 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.listaCarrito = ListaObjetos(tabla="addDetalleCompar")
         self.listaCarrito.listarObjetos()
         self.listaTmp = []
-
-
-
-
         self.listaBusqueda =[]
         self.botenesDescripcion = []
         self.btnBloquear.clicked.connect(self.bloquearTerminal)
@@ -98,6 +92,8 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
     def eventoTicket(self):
         self.eventoCancelarCarrito()
+        self.listaProductos.actualizarListaBD()
+        self.cargarDatosTablaProductos()
         self.vTicke = VentanaDocumentacion()
         SO = platform.system()
         if SO == 'Linux':

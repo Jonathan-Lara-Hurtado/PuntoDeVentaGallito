@@ -66,4 +66,15 @@ cantidad int,
 foreign key(idventa) references venta(idventa),
 foreign key(idproducto) references producto(idproducto));
 
-insert into iva (iva) values (15);
+drop trigger stock;
+delimiter //
+CREATE TRIGGER stock AFTER INSERT ON detalleventa
+FOR EACH ROW
+BEGIN
+    DECLARE cantidad_producto integer;
+    DECLARE resta integer;
+    SET @cantidad_producto :=(SELECT existencia FROM producto WHERe idproducto = NEW.idproducto);
+    SET @resta := @cantidad_producto - NEW.cantidad;
+    update producto SET existencia=@resta where idproducto = NEW.idproducto;
+END;//
+delimiter ;
