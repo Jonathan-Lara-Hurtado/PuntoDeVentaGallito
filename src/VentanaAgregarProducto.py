@@ -8,7 +8,9 @@ from PyQt5.QtCore import pyqtSignal
 from Herramientas.Conector import ConexionBd
 
 class VentanaAgregarProductos(QMainWindow , Ui_VentanaAgregarProductosGui):
+
     senal = pyqtSignal()
+
     def __init__(self, *args, **kwargs):
         QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)

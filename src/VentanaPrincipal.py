@@ -75,14 +75,32 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.vl.btnAceptar.clicked.connect(self.eventoLogin)
         self.inicio()
         self.VentaConfiguracionShow = False
+        self.VentaAgregarProductoShow = False
         self.valorBarra = ""
 
 
     def eventoLectorBarra(self,val):
-        if self.VentaConfiguracionShow:
-            self.vHA.texEditBarras.setText(val)
-        else:
-            self.txtBusquedaProductos.setText(val)
+        Resultado = val.split(',')
+        codigoBarra = Resultado[1].split('\n')
+        if self.VentaConfiguracionShow and Resultado[0] == 'Agregar':
+            self.vHA.texEditBarras.setText(codigoBarra[0])
+        elif self.VentaAgregarProductoShow and Resultado[0] == 'Agregar':
+            self.vAlta.txtACodigoBarra.setText(codigoBarra[0])
+        elif Resultado[0] == 'Busqueda':
+            self.txtBusquedaProductos.setText(codigoBarra[0])
+        elif Resultado[0] == 'Agregar':
+            producto = self.listaProductos.busquedaProducto(codigoBarra[0])
+            tmp = [0, producto.idproducto,
+                   producto.precioventa, 1]
+            self.listaCarrito.addCompra(tmp)
+            self.cargarDatosTablaVentas(lista=self.listaCarrito.lista)
+        elif Resultado[0] == 'Quitar':
+            producto = self.listaProductos.busquedaProducto(codigoBarra[0])
+            tmp = [0, producto.idproducto,
+                   producto.precioventa, 1]
+            self.listaCarrito.quitarCompra(tmp)
+            self.cargarDatosTablaVentas(lista=self.listaCarrito.lista)
+
 
     def actualizaIva(self):
         self.conexion = ConexionBd()
@@ -130,6 +148,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         vConfirmacion.darListaDetalles(self.listaCarrito)
         vConfirmacion.darUsuario(self.UsuarioInformacion)
         vConfirmacion.exec_()
+
 
 
     def eventoAgregarCarrito(self):
@@ -224,6 +243,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.vAlta.darCategoria(self.listaMarca.lista)
             self.vAlta.darProvedor(self.listaProveedor.lista)
             self.vAlta.senal.connect(self.eventoActualizar)
+            self.VentaAgregarProductoShow = True
             self.vAlta.show()
         elif res == "actionMarcaalta":
             self.vMarca = VentanaAgregarMarca()
@@ -267,6 +287,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
     def ventanasCerradas(self):
         self.VentaConfiguracionShow = False
+        self.VentaAgregarProductoShow = False
 
     def eventoGraficar(self):
         con = ConexionBd()
@@ -275,6 +296,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.vGrafica.show()
 
     def eventoActualizar(self):
+        self.VentaAgregarProductoShow = False
         self.listaMarca.actualizarListaBD()
         self.listaProductos.actualizarListaBD()
         self.listaProveedor.actualizarListaBD()
@@ -362,9 +384,8 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.btnCancelarPago.setEnabled(f)
         self.btnAddProducto.setEnabled(f)
         self.btnQuitarProducto.setEnabled(f)
-
-
-
+        self.btnExportar.setEnabled(f)
+        self.txtBusquedaProductos.setEnabled(f)
         """
         res = t.text()
         if res == "Acerca de":
