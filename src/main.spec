@@ -4,10 +4,10 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['/home/lara/Escritorio/proyectoTacubeño/linux/Laster/src'],
+             pathex=['/home/lara/Documentos/eliminar/PuntoDeVentaGallito/src'],
              binaries=[],
-             datas=[],
-             hiddenimports=[],
+             datas=[('Recursos', 'Recursos'), ('Documentacion', 'Documentacion')],
+             hiddenimports=['pkg_resources.py2_warn'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
