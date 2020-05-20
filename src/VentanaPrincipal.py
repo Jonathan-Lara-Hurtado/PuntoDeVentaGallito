@@ -31,12 +31,16 @@ from Herramientas.Modelos import DetalleCompra
 from VentanaIva import VentanaAgregarIva
 from Herramientas.Grafica import GraficaVentas
 from Herramientas.Generarpdf import CrearListaProductos
+from Herramientas.LectorBarra import HiloBarra
 
 class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
     def __init__(self, *args, **kwargs):
         QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
+        self.Escaner = HiloBarra()
+        self.Escaner.start()
+        self.Escaner.sinal.connect(self.eventoLectorBarra)
         self.UsuarioInformacion = []
         self.listaMarca = ListaObjetos(tabla="marca")
         self.listaMarca.listarObjetos()
@@ -70,6 +74,15 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
         self.vl.setWindowFlag(Qt.WindowCloseButtonHint, True)
         self.vl.btnAceptar.clicked.connect(self.eventoLogin)
         self.inicio()
+        self.VentaConfiguracionShow = False
+        self.valorBarra = ""
+
+
+    def eventoLectorBarra(self,val):
+        if self.VentaConfiguracionShow:
+            self.vHA.texEditBarras.setText(val)
+        else:
+            self.txtBusquedaProductos.setText(val)
 
     def actualizaIva(self):
         self.conexion = ConexionBd()
@@ -246,9 +259,14 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.documentacion.show()
         elif res == "actionEscanerApp":
             self.vHA = VentanaConexionEscaner()
+            self.vHA.senal.connect(self.ventanasCerradas)
+            self.VentaConfiguracionShow = True
             self.vHA.show()
         else:
             print("nada")
+
+    def ventanasCerradas(self):
+        self.VentaConfiguracionShow = False
 
     def eventoGraficar(self):
         con = ConexionBd()
