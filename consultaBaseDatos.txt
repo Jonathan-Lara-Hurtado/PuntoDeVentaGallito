@@ -78,3 +78,10 @@ BEGIN
     update producto SET existencia=@resta where idproducto = NEW.idproducto;
 END;//
 delimiter ;
+
+
+Insert into empleado (nombre,apellidopaterno,apellidomaterno,edad,tipoempleado,contraseña,fechaContratacion,direccion,correo) values
+("Jonathan", "Lara", "Hurtado", 18, "Gerente", "12345", '1997-7-31', "Av.Francisco Villa Mz.933 Lt.8","root")
+
+
+Insert into iva (iva) values ('16');
