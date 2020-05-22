@@ -32,6 +32,7 @@ from VentanaIva import VentanaAgregarIva
 from Herramientas.Grafica import GraficaVentas
 from Herramientas.Generarpdf import CrearListaProductos
 from Herramientas.LectorBarra import HiloBarra
+from VentanaEmpleados import VentanaListaEmpleados
 
 class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
 
@@ -269,6 +270,9 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.d.show()
         elif res == "actionProductos_Vendidos":
             self.eventoGraficar()
+        elif res == "actionEmpleadoLista":
+            self.vlE = VentanaListaEmpleados()
+            self.vlE.show()
 
         elif res == "actionDocumentacion":
             self.documentacion = VentanaDocumentacion()

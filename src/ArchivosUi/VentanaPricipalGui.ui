@@ -349,7 +349,14 @@ selection-background-color: rgb(52, 101, 164);</string>
      <addaction name="actionEmpleado"/>
      <addaction name="actionIva"/>
     </widget>
+    <widget class="QMenu" name="menuListas">
+     <property name="title">
+      <string>Listas</string>
+     </property>
+     <addaction name="actionEmpleadoLista"/>
+    </widget>
     <addaction name="menualta"/>
+    <addaction name="menuListas"/>
    </widget>
    <widget class="QMenu" name="menuHerramientas">
     <property name="styleSheet">
@@ -444,6 +451,11 @@ selection-background-color: rgb(52, 101, 164);</string>
   <action name="actionProductos_Vendidos">
    <property name="text">
     <string>Productos Vendidos</string>
+   </property>
+  </action>
+  <action name="actionEmpleadoLista">
+   <property name="text">
+    <string>Empleado</string>
    </property>
   </action>
  </widget>

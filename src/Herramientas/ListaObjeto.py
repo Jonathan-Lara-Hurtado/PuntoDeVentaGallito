@@ -52,6 +52,15 @@ class ListaObjetos:
         elif self.tabla is "addDetalleCompar":
             self.lista = list()
 
+        elif self.tabla is "empleado":
+            bd = ConexionBd()
+            for i in bd.datos("select * from " + self.tabla):
+                self.lista.append(Empleado(i[0],i[1],i[2],
+                                           i[3],i[4],i[5],
+                                           i[6],i[7],i[8],
+                                           i[9]))
+
+
     def busqueda(self,valor):
         listatmp = []
         if valor is "":

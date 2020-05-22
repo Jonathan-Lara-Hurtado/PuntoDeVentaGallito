@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VentanaEmpleados</class>
+ <widget class="QMainWindow" name="VentanaEmpleados">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>979</width>
+    <height>471</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ListaEmpleados</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTableWidget" name="tablaEmpleado">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(238, 238, 236);</string>
+      </property>
+      <column>
+       <property name="text">
+        <string>Id Empleado</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nombre</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Apellido Paterno</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Apellido Materno</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Edad</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tipo Empleado</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Contraseña</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fecha de Contratacion</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Direccion</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Usuario Sistema</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

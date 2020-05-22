@@ -3,6 +3,110 @@ from typing import Any
 from .ConexionBD import BD
 from .Conector import ConexionBd
 
+class Empleado:
+    def __init__(self,idempleado,nombre,apellidopaterno,apellidomaterno,edad,tipoempleado,contrasena,fechaContratacion,direccion,correo):
+        self.__idempleado =idempleado
+        self.__nombre = nombre
+        self.__apellidopaterno = apellidopaterno
+        self.__apellidomaterno = apellidomaterno
+        self.__edad = edad
+        self.__tipoempleado = tipoempleado
+        self.__contrasena = contrasena
+        self.__fechaContratacion = fechaContratacion
+        self.__direccion = direccion
+        self.__correo = correo
+
+    @property
+    def idempleado(self):
+        return self.__idempleado 
+    
+    @idempleado.setter
+    def idempleado(self, value):
+        self.__idempleado = value
+    
+    @property
+    def nombre(self):
+        return self.__nombre 
+    
+    @nombre.setter
+    def nombre(self, value):
+        self.__nombre = value
+        
+    @property
+    def apellidopaterno(self):
+        return self.__apellidopaterno 
+    
+    @apellidopaterno.setter
+    def apellidopaterno(self, value):
+        self.__apellidopaterno = value
+        
+    @property
+    def apellidomaterno(self):
+        return self.__apellidomaterno 
+    
+    @apellidomaterno.setter
+    def apellidomaterno(self, value):
+        self.__apellidomaterno = value
+        
+        
+    @property
+    def edad(self):
+        return self.__edad 
+    
+    @edad.setter
+    def edad(self, value):
+        self.__edad = value
+    
+    @property
+    def tipoempleado(self):
+        return self.__tipoempleado 
+    
+    @tipoempleado.setter
+    def tipoempleado(self, value):
+        self.__tipoempleado = value
+    
+    @property
+    def contrasena(self):
+        return self.__contrasena 
+    
+    @contrasena.setter
+    def contrasena(self, value):
+        self.__contrasena = value
+        
+    @property
+    def fechaContratacion(self):
+        return self.__fechaContratacion 
+    
+    @fechaContratacion.setter
+    def fechaContratacion(self, value):
+        self.__fechaContratacion = value
+
+
+    @property
+    def direccion(self):
+        return self.__direccion 
+    
+    @direccion.setter
+    def direccion(self, value):
+        self.__direccion = value
+        
+    @property
+    def correo(self):
+        return self.__correo 
+    
+    @correo.setter
+    def correo(self, value):
+        self.__correo = value
+
+    def __str__(self):
+        return str(self.correo)
+
+    def listarAtributos(self):
+        return [self.idempleado,self.nombre,
+                self.apellidopaterno,self.apellidomaterno,
+                self.edad, self.tipoempleado, self.contrasena,
+                self.fechaContratacion,self.direccion,self.correo]
+
 class Producto:
 
     def __init__(self, idproducto, idmarca, idProvedor, nombreproducto, codigoBarra, precioventa, descripcion,existencia):
