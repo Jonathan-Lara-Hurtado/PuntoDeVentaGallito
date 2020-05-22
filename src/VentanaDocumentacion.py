@@ -1,12 +1,13 @@
 import platform
 if platform.system() == 'Linux':
     from VentanasGui.linux.VentanaNavegadorDocumentacionGui import Ui_NavegadorDocumentacion
+    from PyQt5.QtWebKit import *
 elif platform.system() == 'Windows':
     from VentanasGui.windows.VentanaNavegadorDocumentacionGui import Ui_NavegadorDocumentacion
     from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView, QWebEnginePage as QWebPage
     from PyQt5.QtWebEngineWidgets import QWebEngineSettings as QWebSettings
 from PyQt5.QtWidgets import QMainWindow,QDesktopWidget
-#from PyQt5.QtWebKit import *
+
 
 class VentanaDocumentacion(QMainWindow, Ui_NavegadorDocumentacion):
     def __init__(self, *args, **kwargs):
