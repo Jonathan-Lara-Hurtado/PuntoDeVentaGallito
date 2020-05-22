@@ -80,6 +80,10 @@ END;//
 delimiter ;
 
 
+CREATE USER 'gallito'@'localhost' IDENTIFIED BY '12345';
+
+GRANT ALL PRIVILEGES ON gallitonegro. * TO 'gallito'@'localhost';
+
 Insert into empleado (nombre,apellidopaterno,apellidomaterno,edad,tipoempleado,contraseña,fechaContratacion,direccion,correo) values
 ("Jonathan", "Lara", "Hurtado", 18, "Gerente", "12345", '1997-7-31', "Av.Francisco Villa Mz.933 Lt.8","root")
 
