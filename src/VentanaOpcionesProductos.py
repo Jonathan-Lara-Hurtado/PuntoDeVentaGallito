@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QGridLayout,QWidget,QDesktopWidget
 from PyQt5.QtCore import pyqtSignal
 
 from VentanasGui.VentanaOpcionesProductosGui import Ui_VentanaOpcionesProductosGui
+from Herramientas.Conector import ConexionBd
 
 class VentanaOpcionesProductos(QMainWindow,Ui_VentanaOpcionesProductosGui):
     senal = pyqtSignal()
@@ -12,12 +13,25 @@ class VentanaOpcionesProductos(QMainWindow,Ui_VentanaOpcionesProductosGui):
         self.setupUi(self)
         self.iniciar()
         self.categoria= {}
+        self.producto = []
         self.btnACancelar.clicked.connect(self.eventoCancelar)
+        self.btnEliminar.clicked.connect(self.eventoEliminar)
+        self.btnUpdate.clicked.connect(self.eventoActualizar)
+
+    def eventoEliminar(self):
+        con = ConexionBd()
+        con.eliminarProducto(self.producto.idproducto)
+        self.senal.emit()
+        self.close()
+
+    def eventoActualizar(self):
+        print("actualizar")
 
     def iniciar(self):
         self.centrarPantalla()
 
     def darValores(self,valor):
+        self.producto = valor
         self.txtACodigoBarra.setText(valor.codigoBarra)
         self.txtANombre.setText(str(valor.nombreproducto))
         self.textEditADescripcion.setText(str(valor.descripcion))

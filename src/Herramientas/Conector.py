@@ -27,6 +27,13 @@ class ConexionBd:
         except mysql.connector.Error as err:
             return True
 
+    def eliminarProducto(self,id):
+        cursor = self.cnx.cursor()
+        del_Producto = ("Delete from producto where idproducto="+str(id))
+        cursor.execute(del_Producto)
+        self.cnx.commit()
+        cursor.close()
+
 
     def insertardetalleventa(self, idventa, idproducto, precio, cantidad):
         cursor = self.cnx.cursor()

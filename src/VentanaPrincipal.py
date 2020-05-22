@@ -371,6 +371,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
                 if i[0].objectName() == self.sender().objectName():
                     self.vOP = VentanaOpcionesProductos()
                     self.vOP.darValores(self.listaProductos.lista[i[1]])
+                    self.vOP.senal.connect(self.eventoActualizar)
                     self.vOP.darMarca(self.listaMarca.lista)
                     self.vOP.darProvedor(self.listaProveedor.lista)
                     self.vOP.show()
@@ -378,6 +379,7 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             for i in self.botenesDescripcion:
                 if i[0].objectName() == self.sender().objectName():
                     self.vOP = VentanaOpcionesProductos()
+                    self.vOP.senal.connect(self.eventoActualizar)
                     self.vOP.darValores(self.listaBusqueda[i[1]])
                     self.vOP.darMarca(self.listaMarca.lista)
                     self.vOP.darProvedor(self.listaProveedor.lista)
