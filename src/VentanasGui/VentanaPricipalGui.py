@@ -32,8 +32,7 @@ class Ui_VentanaPricipal(object):
         self.txtBusquedaProductos.setObjectName("txtBusquedaProductos")
         self.verticalLayout.addWidget(self.txtBusquedaProductos)
         self.tablaProductos = QtWidgets.QTableWidget(self.centralwidget)
-        self.tablaProductos.setStyleSheet("background-color: rgb(85, 87, 83);\n"
-"color: rgb(238, 238, 236);")
+        self.tablaProductos.setStyleSheet("background-color: rgb(238, 238, 236);")
         self.tablaProductos.setObjectName("tablaProductos")
         self.tablaProductos.setColumnCount(5)
         self.tablaProductos.setRowCount(0)
@@ -119,8 +118,7 @@ class Ui_VentanaPricipal(object):
         self.horizontalLayout_3.addLayout(self.verticalLayout_4)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.tablaProductosVenta = QtWidgets.QTableWidget(self.centralwidget)
-        self.tablaProductosVenta.setStyleSheet("background-color: rgb(85, 87, 83);\n"
-"color: rgb(238, 238, 236);")
+        self.tablaProductosVenta.setStyleSheet("background-color: rgb(238, 238, 236);")
         self.tablaProductosVenta.setObjectName("tablaProductosVenta")
         self.tablaProductosVenta.setColumnCount(5)
         self.tablaProductosVenta.setRowCount(0)
