@@ -7,7 +7,13 @@ pyrcc5 resource.qrc -o ./Recursos/resource_rc.py
 
 ###############################################
 Libreria para graficar
+Linux
 pip3 install matplotlib
+Windows
+python -m pip install numpy
+python -m pip install scipy
+python -m pip install matplotlib
+
 ############################################
 
 
