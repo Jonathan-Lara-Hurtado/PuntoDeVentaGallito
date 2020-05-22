@@ -25,7 +25,21 @@ class VentanaOpcionesProductos(QMainWindow,Ui_VentanaOpcionesProductosGui):
         self.close()
 
     def eventoActualizar(self):
-        print("actualizar")
+        tmp = []
+        tmp2 = []
+        for i in self.categoria:
+            if i.__str__() == self.comboMarca.currentText():
+                tmp = i
+        for e in self.proveedor:
+            if e.__str__() == self.comboProveedor.currentText():
+                tmp2 = e
+        con = ConexionBd()
+        con.actulizarProducto(self.producto.idproducto,tmp.idMarca, tmp2.idproveedor,
+                     self.txtANombre.text(), self.txtACodigoBarra.text(),
+                     self.preciospin.value(), self.textEditADescripcion.toPlainText(),
+                     self.stockspink.value())
+        self.senal.emit()
+        self.close()
 
     def iniciar(self):
         self.centrarPantalla()

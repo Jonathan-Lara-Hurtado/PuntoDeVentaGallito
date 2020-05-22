@@ -46,6 +46,22 @@ class ConexionBd:
         cursor.close()
         self.cnx.close()
 
+
+    def actulizarProducto(self,idproducto,idmarca,idProvedor,nombreproducto,codigoBarra,precioventa,descripcion,existencia):
+        cursor = self.cnx.cursor()
+        actualizar_producto = ("update producto set idmarca= %s , idProvedor = %s ,"
+                               "nombreproducto = %s , codigoBarra= %s ,"
+                               "precioventa = %s, descripcion = %s ,"
+                               "existencia = %s where idproducto = %s")
+
+
+        data_actualizar_producto =(idmarca,idProvedor,nombreproducto,codigoBarra,precioventa,descripcion,existencia,idproducto)
+
+        print(data_actualizar_producto)
+        cursor.execute(actualizar_producto, data_actualizar_producto)
+        self.cnx.commit()
+        cursor.close()
+
     def insertarProducto(self,idmarca,idProvedor,nombreproducto,codigoBarra,precioventa,descripcion,existencia):
         cursor = self.cnx.cursor()
         add_producto = ("Insert into producto"
