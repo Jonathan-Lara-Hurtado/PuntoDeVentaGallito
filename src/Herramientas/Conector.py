@@ -3,7 +3,7 @@ from datetime import date, datetime, timedelta
 import calendar
 
 class ConexionBd:
-    def __init__(self,user='gallito',passw='12345',host='127.0.0.1',db='gallitonegro'):
+    def __init__(self,user='root',passw='12345',host='127.0.0.1',db='gallitonegro'):
         self.cnx = mysql.connector.connect(
             user=user,
             password =passw,

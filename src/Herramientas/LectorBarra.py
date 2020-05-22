@@ -8,6 +8,7 @@ class HiloBarra(QThread):
         QThread.__init__(self)
         self.direccion = Redes()
         self.host = str(self.direccion.get_DireccionIp())
+        print(self.host)
         self.port = 12345
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.bind((self.host, self.port))

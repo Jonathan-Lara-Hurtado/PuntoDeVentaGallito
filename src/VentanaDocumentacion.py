@@ -4,7 +4,7 @@ if platform.system() == 'Linux':
 elif platform.system() == 'Windows':
     from VentanasGui.windows.VentanaNavegadorDocumentacionGui import Ui_NavegadorDocumentacion
 from PyQt5.QtWidgets import QMainWindow,QDesktopWidget
-from PyQt5.QtWebKit import *
+#from PyQt5.QtWebKit import *
 
 class VentanaDocumentacion(QMainWindow, Ui_NavegadorDocumentacion):
     def __init__(self, *args, **kwargs):
