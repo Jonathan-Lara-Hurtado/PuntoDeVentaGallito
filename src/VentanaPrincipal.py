@@ -132,8 +132,13 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
             self.libreria = os.path.join(os.getcwd(), "Documentacion","pdfjs" ,"web","viewer.html")
             self.libreria = "file://" + self.libreria
         elif SO == 'Windows':
-            self.url = "file:///" + os.getcwd() + "/Documentacion" + "/index.html"
+            self.url = "file:///" + os.getcwd() + "/Ticket.pdf"
             self.url = self.url.replace(chr(92), chr(47))
+
+            self.libreria = "file:///" + os.getcwd() + "/Documentacion"+"/pdfjs"+"/web"+"/viewer.html"
+            self.libreria = self.libreria.replace(chr(92), chr(47))
+
+        print(self.url,self.libreria)
 
         self.vTicke.setWindowTitle("Ticket de Compra")
         self.vTicke.NavegadorVisor.load(QUrl.fromUserInput('%s?file=%s' % (self.libreria, self.url)))
