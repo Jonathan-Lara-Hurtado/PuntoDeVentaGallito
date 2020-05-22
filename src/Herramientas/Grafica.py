@@ -23,10 +23,7 @@ class GraficaVentas:
     def barra(self):
         lista = []
         for i in range(1, self.N+1):
-            lista.append(1)
-        lista2 = []
-        for i in range(1, self.N+1):
-            lista2.append(i)
+            lista.append(0.01)
         rectangulo = self.ax.bar(self.ind,self.datos,self.width,color='b',yerr=lista)
 
 
