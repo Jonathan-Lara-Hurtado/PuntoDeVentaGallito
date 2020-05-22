@@ -113,13 +113,12 @@ class VentanaPrincipal(QMainWindow,Ui_VentanaPricipal):
     def eventoExportar(self):
         self.file = QFileDialog()
         filame = self.file.getSaveFileName(self)
-
-
-        archivo = CrearListaProductos(filame[0])
-        for i in self.listaProductos.lista:
-            a = (i.idproducto,i.idProvedor,i.nombreproducto,i.codigoBarra,i.precioventa,i.existencia)
-            archivo.addData(a)
-        archivo.generar()
+        if filame[0] != '':
+            archivo = CrearListaProductos(filame[0])
+            for i in self.listaProductos.lista:
+                a = (i.idproducto,i.idProvedor,i.nombreproducto,i.codigoBarra,i.precioventa,i.existencia)
+                archivo.addData(a)
+            archivo.generar()
 
     def eventoTicket(self):
         self.eventoCancelarCarrito()

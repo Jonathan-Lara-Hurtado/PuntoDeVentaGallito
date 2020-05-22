@@ -46,8 +46,7 @@ color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 255,
         <item>
          <widget class="QTableWidget" name="tablaProductos">
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(85, 87, 83);
-color: rgb(238, 238, 236);</string>
+           <string notr="true"/>
           </property>
           <column>
            <property name="text">
@@ -241,8 +240,7 @@ color: rgb(238, 238, 236);</string>
         <item>
          <widget class="QTableWidget" name="tablaProductosVenta">
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(85, 87, 83);
-color: rgb(238, 238, 236);</string>
+           <string notr="true"/>
           </property>
           <column>
            <property name="text">
