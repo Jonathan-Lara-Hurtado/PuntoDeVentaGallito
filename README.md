@@ -21,14 +21,17 @@
 ---
 ## Instalacion de matplotlib(libreria para graficar).
 
-- Linux 
-    - pip3 install matplotlib
-
-- Windows
-    - python -m pip install numpy
-    - python -m pip install scipy
-    - python -m pip install matplotlib
-
+- Linux digitar el siguiente comando:
+    
+    ~~~
+    pip3 install matplotlib
+    ~~~
+- Windows digitar el siguientes comandos:
+    ~~~
+    python -m pip install numpy
+    python -m pip install scipy
+    python -m pip install matplotlib
+    ~~~
 ##
 
 Windows
