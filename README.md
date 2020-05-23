@@ -32,33 +32,30 @@
     python -m pip install scipy
     python -m pip install matplotlib
     ~~~
-##
 
-Windows
-#################################################
-pip install PyQtWebEngine
-para que funcione el web
-#####from PyQt5 import QtWebKitWidgets
-from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView,QWebEnginePage as QWebPage
-from PyQt5.QtWebEngineWidgets import QWebEngineSettings as QWebSettings
+---
 
+## Instalacion plugin web Pyqt5
 
-#################################################
-Linux
-#################################################
-sudo apt-get install python3-pyqt5.qtwebkit
+- **Windows**
+     ~~~
+     pip install PyQtWebEngine     
+     ~~~
+- **Linux**
+    ~~~
+    sudo apt-get install python3-pyqt5.qtwebkit
+    ~~~
+---
+## Generar el ejecutable con pyinstaller
 
-
-
-
-#################################################
-Mac
-#################################################
-
-
-
-################################################
-pyinstaller
-#############################################
-pyinstaller --add-data 'Recursos:Recursos' --add-data 'Documentacion:Documentacion' main.py 
+Ejecutar el siguiente comando en la carpteta src sin importar el S.O
+~~~
 pyinstaller main.spec
+~~~
+---
+
+## Notas
+- Como generar un main.spec
+    ~~~
+    pyinstaller --add-data 'Recursos:Recursos' --add-data 'Documentacion:Documentacion' main.py 
+    ~~~
