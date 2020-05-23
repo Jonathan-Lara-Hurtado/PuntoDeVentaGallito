@@ -2,16 +2,23 @@
 
 
 
-** Comandos de Conversion de archivos: **
+**Comandos de Conversion de archivos:**
 
+- Para convertir archivo ui a py usar el siguiente comando
+    ~~~
+    pyuic5 -x <nombre>.ui -o <nombre>.py      
+    ~~~
 
-Para convertir archivo ui a py usar el siguiente comando
-* pyuic5 -x <nombre>.ui -o <nombre>.py 
+- Para convertir un archivo recurso .qrc a py usar el siguiente comando
+    ~~~
+    pyrcc5 <nombre>.qrc -o <nombre>.py
+    ~~~
 
-Para convertir un archivo recurso .qrc a py usar el siguiente comando
-
-* pyrcc5 resource.qrc -o ./Recursos/resource_rc.py
-
+    ejemplo:  
+    ~~~
+    pyrcc5 resource.qrc -o ./Recursos/resource_rc.py
+    ~~~
+---
 ## Instalacion de matplotlib(libreria para graficar).
 
 - Linux 
