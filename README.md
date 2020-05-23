@@ -14,14 +14,6 @@ Para convertir un archivo recurso .qrc a py usar el siguiente comando
 
 
 
-#################################################
-
-
-
-################################################
-pyuic5 -x <nombre>.ui -o <nombre>.py
-pyrcc5 resource.qrc -o ./Recursos/resource_rc.py
-
 
 ###############################################
 Libreria para graficar
