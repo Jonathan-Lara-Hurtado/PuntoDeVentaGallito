@@ -2,7 +2,8 @@
 
 
 
-## Comandos de Conversion de archivos:
+** Comandos de Conversion de archivos: **
+
 
 Para convertir archivo ui a py usar el siguiente comando
 * pyuic5 -x <nombre>.ui -o <nombre>.py 
