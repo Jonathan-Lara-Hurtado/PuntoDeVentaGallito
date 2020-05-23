@@ -1,5 +1,23 @@
+#Punto de Venta Gallito Negro
+
+
+##Windows
+####Comandos
+Para convertir archivo ui a py usar el siguiente comando
+* pyuic5 -x <nombre>.ui -o <nombre>.py 
+
+Para convertir un archivo recurso .qrc a py usar el siguiente comando
+
+* pyrcc5 resource.qrc -o ./Recursos/resource_rc.py
+
+##Linux
+
+
+
 #################################################
-Generar .ui a .py
+
+
+
 ################################################
 pyuic5 -x <nombre>.ui -o <nombre>.py
 pyrcc5 resource.qrc -o ./Recursos/resource_rc.py
